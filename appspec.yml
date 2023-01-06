@@ -1,0 +1,20 @@
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:ap-south-1:122521033212:task-definition/Food-Hardik:1 "
+        LoadBalancerInfo:
+          ContainerName: "food"
+          ContainerPort: 8080
+# Optional properties
+        PlatformVersion: "LATEST"
+        NetworkConfiguration:
+          AwsvpcConfiguration:
+            Subnets: [" subnet-031c4d8c8cb33296f"]
+            SecurityGroups: ["sg-06d4a7763ee4a3cd0"]
+            AssignPublicIp: "ENABLED"
+        CapacityProviderStrategy:
+          - Base: 0
+            CapacityProvider: "FARGATE"
+            Weight: 1
